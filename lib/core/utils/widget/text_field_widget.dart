@@ -28,7 +28,7 @@ class TextFieldWidget extends StatefulWidget {
 
   const TextFieldWidget({
     Key? key,
-    required this.labelText,
+    this.labelText,
     this.id,
     this.value,
     this.validator,
