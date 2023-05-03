@@ -125,11 +125,11 @@ class SqlBaseRepoImpl implements SqlBaseRepo {
       'SELECT COUNT(*) FROM $tableWithWhere',
       whereArgs,
     );
-    final _returnValue = countData.isEmpty
+    final returnValue = countData.isEmpty
         ? -1
         : (countData.first.values.isEmpty
             ? -1
             : convertType<int>(countData.first.values.first) ?? 0);
-    return _returnValue;
+    return returnValue;
   }
 }

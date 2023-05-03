@@ -15,9 +15,10 @@ class FieldFinancialCurrency extends StatelessWidget {
         usePrefix: true,
         prefixIcon: Icons.monetization_on_outlined,
         controller: controller,
+        textInputType: TextInputType.number,
         border: const OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
         inputFormatters: [
-          FirstNotZeroCurencyFormatter(maxLenght: 9),
+          FirstNotZeroCurencyUSDFormatter(maxLenght: 9),
         ],
     );
   }
