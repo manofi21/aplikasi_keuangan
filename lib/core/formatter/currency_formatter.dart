@@ -1,35 +1,36 @@
 import 'package:flutter/services.dart';
 
-class FirstNotZeroCurencyFormatter extends TextInputFormatter {
+class FirstNotZeroCurencyUSDFormatter extends TextInputFormatter {
   final int? maxLenght;
-  final bool isIdr;
-  FirstNotZeroCurencyFormatter({this.maxLenght, this.isIdr = true});
-
-  final firstNotZeroRegex =
-      RegExp(r'(^(Rp\.|\$)\s([1-9][0-9]{0,2}))([\.\,]{1}[0-9]{3})$');
-
-  final firstNotZeroIdrRegex =
-      RegExp(r'^Rp\.\s([1-9][0-9]{0,2})(\,{1}[0-9]{3})*$');
-  // RegExp(r'(^Rp\.\s([1-9][0-9]{0,2}))(\,{1}[0-9]{3})$');
-
-  final firstNotZeroUsdRegex =
-      RegExp(r'(^\$\s([1-9][0-9]{0,2}))(\.{1}[0-9]{3})$');
+  FirstNotZeroCurencyUSDFormatter({this.maxLenght});
 
   RegExp pointingString(int modulreResult) =>
       RegExp('(?<=.{${modulreResult == 0 ? 3 : modulreResult}}).{3}');
+
+  final firstNotZeroUsdRegex =
+      RegExp(r'^Rp\.\s([1-9][0-9]{0,2})(\.{1}[0-9]{3})*$');
+  //'^Rp\.\s([1-9][0-9]{0,2})(\,{1}[0-9]{3})*$
 
   @override
   TextEditingValue formatEditUpdate(
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    var newValueString = '';
     var newCurrentText = newValue.text;
-    final firstChracterCurrency = isIdr ? 'Rp. ' : r'$ ';
-    final pointCurrency = isIdr ? ',' : '.';
+    const firstCharacterCurrency = r'Rp. ';
+    const pointCurrency = '.';
+    final maxLenght = this.maxLenght;
 
-    if (newCurrentText.length - firstChracterCurrency.length > 3) {
-      final newString = newCurrentText.replaceAll(r'\D', '');
+    if (newCurrentText.length - firstCharacterCurrency.length > 3) {
+      final newString = newCurrentText.replaceAll(RegExp(r'\D+'), '');
+
+      if (maxLenght != null && maxLenght < newString.length) {
+        return TextEditingValue(
+          text: oldValue.text,
+          selection: TextSelection.collapsed(offset: oldValue.text.length),
+        );
+      }
+
       final splitFirst = newString.length % 3;
       final regexAccrdingDatalength = pointingString(splitFirst);
       final returnStringAsItString = newString.replaceAllMapped(
@@ -39,26 +40,28 @@ class FirstNotZeroCurencyFormatter extends TextInputFormatter {
       newCurrentText = returnStringAsItString;
     }
 
-    if (!newCurrentText.startsWith(RegExp(r'^(Rp\.|\$)\s'))) {
-      newCurrentText = firstChracterCurrency + newCurrentText;
+    if (newCurrentText.startsWith(RegExp(r'^(Rp\.)\s')) &&
+        newCurrentText.length == 4) {
+      return const TextEditingValue(
+        selection: TextSelection.collapsed(offset: 0),
+      );
     }
 
-    final isNewValueValid = isIdr
-        ? firstNotZeroIdrRegex.hasMatch(newCurrentText)
-        : firstNotZeroUsdRegex.hasMatch(newCurrentText);
-
-    if (newCurrentText.isEmpty ||
-        (newCurrentText.isNotEmpty && isNewValueValid)) {
-      newValueString = newCurrentText;
+    if (!newCurrentText.startsWith(RegExp(r'^(Rp\.)\s'))) {
+      newCurrentText = firstCharacterCurrency + newCurrentText;
     }
 
-    if (newValue.text.isNotEmpty && !isNewValueValid) {
-      newValueString = oldValue.text;
+    if (firstNotZeroUsdRegex.hasMatch(newCurrentText)) {
+      return TextEditingValue(
+        text: newCurrentText,
+        selection: TextSelection.collapsed(offset: newCurrentText.length),
+      );
     }
 
+    print(newCurrentText);
     return TextEditingValue(
-      text: newValueString,
-      selection: TextSelection.collapsed(offset: newValueString.length),
+      text: oldValue.text,
+      selection: TextSelection.collapsed(offset: oldValue.text.length),
     );
   }
 }
