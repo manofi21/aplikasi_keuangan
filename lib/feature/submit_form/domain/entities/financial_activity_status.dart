@@ -17,7 +17,7 @@ extension StatusFinancialActivityExt on StatusFinancialActivity {
 }
 
 extension IntToStatusFinancialActivityExt on int {
-  StatusFinancialActivity get asIndex {
+  StatusFinancialActivity get fromIndex {
     switch (this) {
       case 1:
         return StatusFinancialActivity.income;
