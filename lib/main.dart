@@ -1,5 +1,9 @@
 import 'package:aplikasi_keuangan/feature/submit_form/persentation/pages/submit_form_page_example.dart';
-import 'package:flutter/material.dart';
+import 'package:aplikasi_keuangan/ui_export.dart';
+
+import 'feature/financial_activity/domain/entities/financial_activity.dart';
+import 'feature/submit_form/persentation/provider/list_financial_acitivity_provider.dart';
+import 'feature/submit_form/persentation/provider/submit_form_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,8 +30,21 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: Container(
-          padding: EdgeInsets.all(10),
-          child: const SubmitFormPage(),
+          padding: const EdgeInsets.all(10),
+          child: MultiProvider(
+            providers: [
+              Provider(create: (context) => SubmitFormProvider()),
+              FutureProvider<List<FinancialActivity>>(
+                create: (context) {
+                  final listFinancialActivityProvider =
+                      ListFinancialActivityProvider();
+                  return listFinancialActivityProvider.getActivity();
+                },
+                initialData: const [],
+              )
+            ],
+            child: const SubmitFormPage(),
+          ),
         )
         // const MyHomePage(title: 'Flutter Demo Home Page'),
         );
