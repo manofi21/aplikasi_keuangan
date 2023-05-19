@@ -1,4 +1,5 @@
 import 'package:aplikasi_keuangan/core/utils/sql_base/sql_base_repo.dart';
+import 'package:aplikasi_keuangan/feature/financial_activity/domain/entities/financial_activity_status.dart';
 
 
 import '../../domain/entities/financial_activity.dart';
