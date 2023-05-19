@@ -32,6 +32,7 @@ class FinanancialActivityRepoImpl implements FinanancialActivityRepo {
             amount: e.amount,
             status: e.status.fromIndex,
             dateTime: DateTime.parse(e.dateTime),
+            memo: e.memo
           ),
         )
         .toList();
