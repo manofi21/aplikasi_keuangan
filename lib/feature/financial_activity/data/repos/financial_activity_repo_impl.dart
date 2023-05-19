@@ -1,7 +1,7 @@
 import 'package:aplikasi_keuangan/core/utils/sql_base/sql_base_repo.dart';
-import 'package:aplikasi_keuangan/feature/submit_form/domain/entities/financial_activity.dart';
-import 'package:aplikasi_keuangan/feature/submit_form/domain/entities/financial_activity_status.dart';
 
+
+import '../../domain/entities/financial_activity.dart';
 import '../../domain/repos/financial_activity_repo.dart';
 import '../model/financial_activiy_model.dart';
 

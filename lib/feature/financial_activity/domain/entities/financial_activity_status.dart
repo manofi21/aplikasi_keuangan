@@ -1,4 +1,5 @@
 enum StatusFinancialActivity {
+  init,
   income,
   outcome
 }
@@ -11,7 +12,7 @@ extension StatusFinancialActivityExt on StatusFinancialActivity {
       case StatusFinancialActivity.outcome:
         return 2;
       default:
-        return 1;
+        return 0;
     }
   }
 }
@@ -24,7 +25,17 @@ extension IntToStatusFinancialActivityExt on int {
       case 2:
         return StatusFinancialActivity.outcome;
       default:
-        return StatusFinancialActivity.income;
+        return StatusFinancialActivity.init;
     }
+  }
+}
+
+extension StatusFinancialActivityToBoolExt on StatusFinancialActivity {
+  bool get isStatusFieldIncome {
+    return this == StatusFinancialActivity.init || this == StatusFinancialActivity.income;
+  }
+
+  bool get isStatusFieldOutcome {
+    return this == StatusFinancialActivity.init || this == StatusFinancialActivity.outcome;
   }
 }
