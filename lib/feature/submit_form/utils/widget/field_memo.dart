@@ -8,12 +8,17 @@ class FieldMemo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFieldWidget(
-      
-      controller: controller,
-      maxLines: 3,
-      border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5))),
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration:  BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(5)),
+        border: Border.all(width: 1)
+      ),
+      child: TextFieldWidget(
+        controller: controller,
+        maxLines: 3,
+        border: InputBorder.none,
+      ),
     );
   }
 }
