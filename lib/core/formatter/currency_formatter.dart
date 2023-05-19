@@ -58,7 +58,6 @@ class FirstNotZeroCurencyUSDFormatter extends TextInputFormatter {
       );
     }
 
-    print(newCurrentText);
     return TextEditingValue(
       text: oldValue.text,
       selection: TextSelection.collapsed(offset: oldValue.text.length),
