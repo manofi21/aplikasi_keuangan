@@ -15,6 +15,17 @@ extension StatusFinancialActivityExt on StatusFinancialActivity {
         return 0;
     }
   }
+
+  String get asStringTitle {
+    switch (this) {
+      case StatusFinancialActivity.income:
+        return "Income";
+      case StatusFinancialActivity.outcome:
+        return "Outcome";
+      default:
+        return "";
+    }
+  }
 }
 
 extension IntToStatusFinancialActivityExt on int {
