@@ -5,6 +5,8 @@ import 'package:aplikasi_keuangan/feature/submit_form/utils/widget/save_button.d
 import 'package:aplikasi_keuangan/ui_export.dart';
 
 import '../../../financial_activity/domain/entities/financial_activity_status.dart';
+import '../../domain/entites/autopopulate_model.dart';
+import '../../utils/widget/field_autopopulate_category.dart';
 import '../../utils/widget/list_financial_activity_widget.dart';
 import '../provider/submit_form_provider.dart';
 
@@ -89,6 +91,16 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
               ),
               const SizedBox(height: 10),
               FieldMemo(controller: noteTextController),
+              const SizedBox(height: 10),
+              CategoryFieldAutoComplete<String>(
+                onSelected: (selectedCategory) {},
+                items: [
+                  AutopopulateModel<String>(value: "Belanja"),
+                  AutopopulateModel<String>(value: "Makan"),
+                  AutopopulateModel<String>(value: "Hobi"),
+                ],
+                indexOfInitialValue: 0,
+              ),
               SaveButton(
                 onPressed: () {
                   submitForm
