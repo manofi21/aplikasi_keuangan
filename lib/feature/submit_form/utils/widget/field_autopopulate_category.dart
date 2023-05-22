@@ -66,7 +66,6 @@ class _CategoryFieldAutoCompleteState<T>
         return result;
       },
       displayStringForOption: (option) {
-        print('result : ${option.labelValue}');
         return option.labelValue;
       },
     );
