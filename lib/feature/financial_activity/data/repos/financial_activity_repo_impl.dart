@@ -14,7 +14,9 @@ class FinanancialActivityRepoImpl implements FinanancialActivityRepo {
         memo: params.memo,
         status: params.status.asIndex,
         amount: params.amount,
-        dateTime: params.dateTime.toString());
+        dateTime: params.dateTime.toString(),
+        category: params.category,
+        );
 
     return repoSql.insertData(
         FinancialActivityModel.table, financialActivity.toMap());
@@ -32,7 +34,8 @@ class FinanancialActivityRepoImpl implements FinanancialActivityRepo {
             amount: e.amount,
             status: e.status.fromIndex,
             dateTime: DateTime.parse(e.dateTime),
-            memo: e.memo
+            memo: e.memo,
+            category: e.category,
           ),
         )
         .toList();

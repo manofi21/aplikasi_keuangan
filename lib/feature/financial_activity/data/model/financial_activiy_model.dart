@@ -6,6 +6,7 @@ class FinancialActivityModel {
   final int amount;
   final int status;
   final String dateTime;
+  final String category;
 
   FinancialActivityModel({
     this.id,
@@ -13,6 +14,7 @@ class FinancialActivityModel {
     required this.amount,
     required this.status,
     required this.dateTime,
+    required this.category,
   });
 
   static const table = "financial_activity";
@@ -21,6 +23,7 @@ class FinancialActivityModel {
   static const keyAmount = "amount";
   static const keyStatus = "status";
   static const keyDateTime = "date_time";
+  static const keyCategory = "category";
 
   Map<String, dynamic> toMap() {
     return {
@@ -29,6 +32,7 @@ class FinancialActivityModel {
       keyAmount: amount,
       keyStatus: status,
       keyDateTime: dateTime,
+      keyCategory: category,
     };
   }
 
@@ -40,7 +44,8 @@ class FinancialActivityModel {
           $keyMemo text,
           $keyAmount integer not null,
           $keyStatus integer not null,
-          $keyDateTime text not null
+          $keyDateTime text not null,
+          $keyCategory text not null
         )
       ''');
   }
@@ -52,6 +57,7 @@ class FinancialActivityModel {
       amount: map[keyAmount],
       status: map[keyStatus],
       dateTime: map[keyDateTime],
+      category: map[keyCategory],
     );
   }
 }
