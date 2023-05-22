@@ -42,9 +42,10 @@ class _CategoryFieldAutoCompleteState<T>
         return TextFieldWidget(
           labelText: "Category",
           usePrefix: true,
-          prefixIcon: Icons.monetization_on_outlined,
+          prefixIcon: Icons.category,
+          focusNode: focusNode,
+          onSubmitted: (text) => onFieldSubmitted(),
           controller: textEditingController,
-          textInputType: TextInputType.number,
           border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10))),
         );
@@ -65,6 +66,7 @@ class _CategoryFieldAutoCompleteState<T>
         return result;
       },
       displayStringForOption: (option) {
+        print('result : ${option.labelValue}');
         return option.labelValue;
       },
     );
