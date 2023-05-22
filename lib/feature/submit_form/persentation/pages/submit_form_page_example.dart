@@ -23,6 +23,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
   final noteTextController = TextEditingController();
   StatusFinancialActivity currentStatus = StatusFinancialActivity.init;
   String amountInput = "";
+  String category = "";
 
   void onAfterClickSave() {
     setState(() {
@@ -93,7 +94,11 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
               FieldMemo(controller: noteTextController),
               const SizedBox(height: 10),
               CategoryFieldAutoComplete<String>(
-                onSelected: (selectedCategory) {},
+                onSelected: (selectedCategory) {
+                  setState(() {
+                    category = selectedCategory.value;
+                  });
+                },
                 items: [
                   AutopopulateModel<String>(value: "Belanja"),
                   AutopopulateModel<String>(value: "Makan"),
@@ -109,7 +114,8 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
                           status: currentStatus,
                           memo: noteTextController.text.isEmpty
                               ? null
-                              : noteTextController.text)
+                              : noteTextController.text,
+                          category: category)
                       .whenComplete(
                     () {
                       onAfterClickSave();
