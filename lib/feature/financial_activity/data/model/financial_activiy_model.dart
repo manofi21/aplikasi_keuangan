@@ -50,6 +50,22 @@ class FinancialActivityModel {
       ''');
   }
 
+  static Future<void> adddingColumnCategory({
+    required Database db,
+    bool isDropFirst = false,
+  }) async {
+    db.transaction((txn) async {
+      try {
+        if (isDropFirst) {
+          await txn.execute("alter table $table drop column $keyCategory");
+        }
+        await txn.rawQuery("select $keyCategory from $table");
+      } catch (e) {
+        await txn.execute("alter table $table add column $keyCategory text default '-' not null");
+      }
+    });
+  }
+
   static FinancialActivityModel fromMap(Map<String, dynamic> map) {
     return FinancialActivityModel(
       id: map[keyId],
