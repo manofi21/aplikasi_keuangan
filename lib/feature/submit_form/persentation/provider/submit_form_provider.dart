@@ -8,6 +8,7 @@ class SubmitFormProvider {
   Future<void> addActivity({
     required String amount,
     required StatusFinancialActivity status,
+    required String category,
     String? memo,
   }) async {
     final financeActivityImpl = FinanancialActivityRepoImpl();
@@ -24,6 +25,7 @@ class SubmitFormProvider {
         status: status,
         dateTime: DateTime.now(),
         memo: memo,
+        category: category,
       ),
     );
   }

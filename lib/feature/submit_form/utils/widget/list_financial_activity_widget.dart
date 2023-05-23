@@ -67,6 +67,7 @@ class FinancialActivityItem extends StatelessWidget {
         child: Column(
           children: [
             childItem("Status", financialActivity.status.asStringTitle),
+            childItem("Category", financialActivity.category),
             childItem(
               "Date",
               DateFormat('EEEE MMMM yyyy, h:mm a')

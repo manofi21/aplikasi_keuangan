@@ -25,6 +25,7 @@ class TextFieldWidget extends StatefulWidget {
   final InputBorder? border;
   final int maxLines;
   final TextInputType textInputType;
+  final FocusNode? focusNode;
 
   const TextFieldWidget({
     Key? key,
@@ -51,6 +52,7 @@ class TextFieldWidget extends StatefulWidget {
     this.maxLines = 1,
     this.textInputType = TextInputType.text,
     this.inputFormatters,
+    this.focusNode,
   }) : super(key: key);
 
   @override
@@ -71,7 +73,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     return TextFormField(
       enabled: widget.enabled,
       controller: widget.controller,
-      focusNode: focusNode,
+      focusNode: widget.focusNode ?? focusNode,
       validator: widget.validator,
       maxLength: widget.maxLength,
       obscureText: widget.obscure,
