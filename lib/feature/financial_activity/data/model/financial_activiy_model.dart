@@ -61,7 +61,7 @@ class FinancialActivityModel {
         }
         await txn.rawQuery("select $keyCategory from $table");
       } catch (e) {
-        await txn.execute("alter table $table add column $keyCategory text default '-' not null");
+        await txn.execute("alter table $table add column $keyCategory text NOT NULL default '-'");
       }
     });
   }
