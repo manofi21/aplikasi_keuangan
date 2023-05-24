@@ -10,11 +10,14 @@ class CategoryFieldAutoComplete<T> extends StatefulWidget {
   final int? indexOfInitialValue;
   final void Function(AutopopulateModel<T> values) onSelected;
 
+  final void Function(TextEditingController controller)? initTextController;
+
   const CategoryFieldAutoComplete({
     super.key,
     this.items = const [],
     this.indexOfInitialValue,
     required this.onSelected,
+    this.initTextController,
   });
 
   @override
@@ -39,6 +42,9 @@ class _CategoryFieldAutoCompleteState<T>
     return Autocomplete<AutopopulateModel<T>>(
       fieldViewBuilder:
           (context, textEditingController, focusNode, onFieldSubmitted) {
+        if (widget.initTextController != null){
+          widget.initTextController!(textEditingController);
+        }
         return TextFieldWidget(
           labelText: "Category",
           usePrefix: true,

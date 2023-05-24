@@ -21,6 +21,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
   final financialIncomeTextController = TextEditingController();
   final financialOutcomeTextController = TextEditingController();
   final noteTextController = TextEditingController();
+  late TextEditingController categoryController;
   StatusFinancialActivity currentStatus = StatusFinancialActivity.init;
   String amountInput = "";
   String category = "";
@@ -32,6 +33,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
       noteTextController.clear();
       currentStatus = StatusFinancialActivity.init;
       amountInput = "";
+      categoryController.clear();
     });
   }
 
@@ -104,7 +106,9 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
                   AutopopulateModel<String>(value: "Makan"),
                   AutopopulateModel<String>(value: "Hobi"),
                 ],
-                indexOfInitialValue: 0,
+                initTextController: (textController) {
+                  categoryController = textController;
+                },
               ),
               SaveButton(
                 onPressed: () {
