@@ -115,7 +115,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
                           memo: noteTextController.text.isEmpty
                               ? null
                               : noteTextController.text,
-                          category: category)
+                          category: category.isEmpty ? ' - ' : category)
                       .whenComplete(
                     () {
                       onAfterClickSave();
