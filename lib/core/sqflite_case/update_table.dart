@@ -10,12 +10,4 @@ Future<void> updateTables(
   if (oldVersion < 2 && newVersion >= 2) {
     FinancialActivityModel.adddingColumnCategory(db: db);
   }
-
-  if (oldVersion < 3 && newVersion >= 3) {
-    FinancialActivityModel.adddingColumnCategory(db: db, isDropFirst: true);
-  }
-
-  if (oldVersion < 4 && newVersion >= 4) {
-    FinancialActivityModel.adddingColumnCategory(db: db, isDropFirst: true);
-  }
 }
