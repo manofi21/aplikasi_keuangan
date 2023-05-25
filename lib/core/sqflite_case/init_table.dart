@@ -6,11 +6,9 @@ Future<void> initTables({
   required Database db,
   required int version,
 }) async {
-  if (version == 1) {
-    await db.transaction(
-      (txn) async {
-        FinancialActivityModel.initTable(txn);
-      },
-    );
-  }
+  await db.transaction(
+    (txn) async {
+      FinancialActivityModel.initTable(txn);
+    },
+  );
 }
