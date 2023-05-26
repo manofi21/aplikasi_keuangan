@@ -115,18 +115,14 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
               ),
               SaveButton(
                 onPressed: () {
-                  submitForm
-                      .addActivity(
-                          amount: amountInput,
-                          status: currentStatus,
-                          memo: noteTextController.text.isEmpty
-                              ? null
-                              : noteTextController.text,
-                          category: category.isEmpty ? ' - ' : category)
-                      .whenComplete(
-                    () {
-                      onAfterClickSave();
-                    },
+                  submitForm.addActivity(
+                    amount: amountInput,
+                    status: currentStatus,
+                    memo: noteTextController.text.isEmpty
+                        ? null
+                        : noteTextController.text,
+                    category: category.isEmpty ? ' - ' : category,
+                    onAfterAddValue: onAfterClickSave,
                   );
                 },
               ),
