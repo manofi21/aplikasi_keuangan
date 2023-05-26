@@ -3,6 +3,7 @@ import 'package:aplikasi_keuangan/ui_export.dart';
 import 'package:intl/intl.dart';
 import '../../../../core/converter/currency_idr_string.dart';
 import '../../../financial_activity/domain/entities/financial_activity.dart';
+import '../../persentation/provider/list_financial_acitivity_provider.dart';
 
 class ListFinancialActivityWidget extends StatefulWidget {
   const ListFinancialActivityWidget({super.key});
@@ -16,7 +17,12 @@ class _ListFinancialActivityWidgetState
     extends State<ListFinancialActivityWidget> {
   @override
   Widget build(BuildContext context) {
-    final listFinancialActivity = context.watch<List<FinancialActivity>>();
+    final financialActivityProv = context.watch<ListFinancialActivityProvider>();
+    if (financialActivityProv.isLoading) {
+      return const Center(child: CircularProgressIndicator(),);
+    }
+
+    final listFinancialActivity = financialActivityProv.listFinancialActivity;
     return ListView.separated(
       itemCount: listFinancialActivity.length,
       separatorBuilder: (context, index) {
