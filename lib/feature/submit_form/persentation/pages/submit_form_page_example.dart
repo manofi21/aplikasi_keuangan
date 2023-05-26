@@ -8,6 +8,7 @@ import '../../../financial_activity/domain/entities/financial_activity_status.da
 import '../../domain/entites/autopopulate_model.dart';
 import '../../utils/widget/field_autopopulate_category.dart';
 import '../../utils/widget/list_financial_activity_widget.dart';
+import '../provider/list_financial_acitivity_provider.dart';
 import '../provider/submit_form_provider.dart';
 
 class SubmitFormPage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
   String amountInput = "";
   String category = "";
 
-  void onAfterClickSave() {
+  Future<void> onAfterClickSave() async {
     setState(() {
       financialIncomeTextController.clear();
       financialOutcomeTextController.clear();
@@ -35,12 +36,14 @@ class _SubmitFormPageState extends State<SubmitFormPage> {
       amountInput = "";
       categoryController.clear();
     });
+    await context.read<ListFinancialActivityProvider>().getActivity();
   }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((Duration duration) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration duration) async {
+      await context.read<ListFinancialActivityProvider>().getActivity();
       financialIncomeTextController.addListener(() {
         setState(() {
           currentStatus = checkStatusActivity(
