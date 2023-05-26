@@ -34,13 +34,9 @@ class MyApp extends StatelessWidget {
           child: MultiProvider(
             providers: [
               Provider(create: (context) => SubmitFormProvider()),
-              FutureProvider<List<FinancialActivity>>(
-                create: (context) {
-                  final listFinancialActivityProvider =
-                      ListFinancialActivityProvider();
-                  return listFinancialActivityProvider.getActivity();
-                },
-                initialData: const [],
+              ChangeNotifierProvider<ListFinancialActivityProvider>(
+                create: (_) => ListFinancialActivityProvider(),
+                lazy: false,
               )
             ],
             child: const SubmitFormPage(),
